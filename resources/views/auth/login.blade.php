@@ -28,27 +28,29 @@
         </div>
 
         {{-- Form Login --}}
-        <form action="#" method="POST" class="space-y-5">
+        <form action="{{ route('login') }}" method="POST" class="space-y-5">
+    @csrf
+    {{-- Email --}}
+    <div>
+        <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+            Email
+        </label>
+        <input
+            type="email"
+            id="email"
+            name="email"
+            value="{{ old('email') }}"
+            placeholder="Masukkan email"
+            autocomplete="email"
+            required
+            class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100 @error('email') border-red-500 @enderror"
+        >
+        @error('email')
+            <span class="text-red-500 text-xs mt-1">{{ $message }}</span>
+        @enderror
+    </div>
 
-            @csrf
-
-            {{-- Username --}}
-            <div>
-                <label for="username" class="mb-2 block text-sm font-semibold text-slate-700">
-                    Username
-                </label>
-
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Masukkan username"
-                    autocomplete="username"
-                    required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-                >
-            </div>
-
+  
             
         {{-- Password --}}
         <div>

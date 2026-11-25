@@ -38,3 +38,15 @@ Route::get('/admin/smartphone', function () {
 Route::get('/admin/kriteria', function () {
     return view('admin.kriteria');
 });
+use App\Http\Controllers\AuthController;
+
+// Rute Login
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
+Route::post('/login', [AuthController::class, 'login']);
+
+// Rute Register
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register')->middleware('guest');
+Route::post('/register', [AuthController::class, 'register']);
+
+// Rute Logout
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');

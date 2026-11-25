@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Sign Up - SPK Smartphone')
@@ -28,42 +27,52 @@
         </div>
 
         {{-- Form Sign Up --}}
-        <form action="#" method="POST" class="space-y-5">
+        <form action="{{ route('register') }}" method="POST" class="space-y-5">
 
             @csrf
 
             {{-- Nama Lengkap --}}
             <div>
-                <label for="name" class="mb-2 block text-sm font-semibold text-slate-700">
+                <label for="nama" class="mb-2 block text-sm font-semibold text-slate-700">
                     Nama Lengkap
                 </label>
 
                 <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="nama"
+                    name="nama"
+                    value="{{ old('nama') }}"
                     placeholder="Masukkan nama lengkap"
                     autocomplete="name"
                     required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    class="w-full rounded-lg border @error('nama') border-red-500 @else border-slate-300 @enderror px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 >
+                
+                @error('nama')
+                    <span class="mt-1 text-xs text-red-500">{{ $message }}</span>
+                @enderror
             </div>
 
-            {{-- Username --}}
+            {{-- Email --}}
             <div>
-                <label for="username" class="mb-2 block text-sm font-semibold text-slate-700">
-                    Username
+                <label for="email" class="mb-2 block text-sm font-semibold text-slate-700">
+                    Email
                 </label>
 
                 <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Buat username"
-                    autocomplete="username"
+                    type="email"
+                    id="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    placeholder="Buat email"
+                    autocomplete="email"
                     required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    class="w-full rounded-lg border @error('email') border-red-500 @else border-slate-300 @enderror px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 >
+                
+                @error('email')
+                    <span class="mt-1 text-xs text-red-500">{{ $message }}</span>
+                @enderror
             </div>
 
             {{-- Password --}}
@@ -76,11 +85,15 @@
                     type="password"
                     id="password"
                     name="password"
-                    placeholder="Buat password"
+                    placeholder="Buat password (min. 6 karakter)"
                     autocomplete="new-password"
                     required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+                    class="w-full rounded-lg border @error('password') border-red-500 @else border-slate-300 @enderror px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
                 >
+                
+                @error('password')
+                    <span class="mt-1 text-xs text-red-500">{{ $message }}</span>
+                @enderror
             </div>
 
             {{-- Konfirmasi Password --}}
@@ -114,7 +127,7 @@
         <p class="mt-6 text-center text-sm text-slate-500">
             Sudah punya akun?
 
-            <a href="/login" class="font-semibold text-blue-600 hover:text-blue-700">
+            <a href="{{ route('login') }}" class="font-semibold text-blue-600 hover:text-blue-700">
                 Login
             </a>
         </p>
